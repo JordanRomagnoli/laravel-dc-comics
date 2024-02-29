@@ -15,7 +15,8 @@ class ComicsSeeder extends Seeder
     public function run(): void
     {
         $comicsData = config('comics');
-
+        //Comic::truncate();
+        
         foreach ($comicsData as $key => $singleComic) {
             $comic = new Comic();
             $comic->title = $singleComic['title'];
@@ -23,7 +24,7 @@ class ComicsSeeder extends Seeder
             $comic->thumb = $singleComic['thumb'];
 
             $replacePrice = str_replace('$', '', $singleComic['price']);
-            $comic->price = intval($replacePrice);
+            $comic->price = floatval($replacePrice);
 
             $comic->series = $singleComic['series'];
             $comic->sale_date = $singleComic['sale_date'];
