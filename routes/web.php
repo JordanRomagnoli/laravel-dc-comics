@@ -14,10 +14,7 @@ use App\Http\Controllers\Admin\ComicController;
 |
 */
 
-Route::get('/',);
+Route::get('/', [ComicController::class, 'index']);
 
-Route::get('/chi-siamo', function () {
-    return view('subpages.about');
-});
 
 Route::resource('comics', ComicController::class);
