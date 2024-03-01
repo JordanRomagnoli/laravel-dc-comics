@@ -57,11 +57,13 @@
                 <div class="mb-3">
                     <label for="artists" class="form-label">Artisti<span class="text-danger"></span></label>
                     <input type="text" class="form-control" id="artists" name="artists" placeholder="Inserisci l'artista'..." maxlength="1000" required>
+                    <button type="button" class="btn btn-secondary" onclick="duplicateInput('artists')">Aggiungi</button>
                 </div>
     
                 <div class="mb-3">
                     <label for="writers" class="form-label">Scrittori<span class="text-danger"></span></label>
                     <input type="text" class="form-control" id="writers" name="writers" placeholder="Inserisci gli scrittori..." maxlength="1000" required>
+                    <button type="button" class="btn btn-secondary" onclick="duplicateInput('writers')">Aggiungi</button>
                 </div>
     
                 <div>
@@ -75,3 +77,19 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function duplicateInput(inputType) {
+            const originalInput = document.querySelector(`[name="${inputType}"]`);
+            
+            if (originalInput) {
+                const clone = originalInput.cloneNode(true);
+                clone.value = ''; 
+                originalInput.parentNode.appendChild(clone);
+            } else {
+                console.error(`Element with name "${inputType}" not found.`);
+            }
+        }
+    </script>
+@endpush

@@ -13,6 +13,7 @@
         @vite('resources/js/app.js')
 
         @yield('head-imports')
+        @stack('scripts')
     </head>
     <body>
 
@@ -29,4 +30,5 @@
         {{-- JS da importare nel body --}}
         @yield('body-imports')
     </body>
+    
 </html>
