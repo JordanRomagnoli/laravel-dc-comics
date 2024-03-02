@@ -69,9 +69,26 @@
                                 @endforeach
                             </td>
                             <td>
-                                <a href="{{ route('comics.show', ['comic' => $comic->id]) }}" class="btn btn-primary">
+                                <a href="{{ route('comics.show', ['comic' => $comic->id]) }}" class="btn btn-primary mb-2">
                                     Vedi
                                 </a>
+                
+                                <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-warning mb-2">
+                                    Modifica
+                                </a>
+
+                                <form
+                                    onsubmit="return confirm('Sicuro di voler eliminare questo elemento ? ...')"
+                                    action="{{ route('comics.destroy' , ['comic'=>$comic->id]) }}"
+                                    method="POST"
+                                    class="d-inline-block"
+                                >
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">
+                                        Elimina
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

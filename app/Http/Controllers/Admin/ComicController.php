@@ -43,11 +43,11 @@ class ComicController extends Controller
         $comic->sale_date = $comicData['sale_date'];
         $comic->type = $comicData['type'];
 
-        $artistsArray[] = $comicData['artists'];
-        $comic->artists = json_encode($artistsArray);
+        $explodedArtists = explode(',' , $comicData['artists']);
+        $comic->artists = json_encode($explodedArtists);
         
-        $writersArray[] = $comicData['writers'];
-        $comic->writers = json_encode($writersArray);
+        $explodedWriters = explode(',' , $comicData['writers']);  
+        $comic->writers = json_encode($explodedWriters);
         
         $comic->save();
         return redirect()->route('comics.show', ['comic' => $comic->id]);
@@ -64,24 +64,37 @@ class ComicController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Comic $comic)
     {
-        //
+        return view('comics.edit', compact('comic'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Comic $comic)
     {
-        //
+        $comicData = $request->all();
+
+        $explodedArtists = explode(',' , $comicData['artists']);
+        $comicData['artists'] = json_encode($explodedArtists);
+
+        $explodedWriters = explode(',' , $comicData['writers']);  
+        $comicData['writers'] = json_encode($explodedWriters);
+
+        $comic->fill($comicData);
+        $comic->save();
+
+        return redirect()->route('comics.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+
+        return redirect()->route('comics.index');
     }
 }

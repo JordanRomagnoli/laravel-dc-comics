@@ -13,7 +13,6 @@
         @vite('resources/js/app.js')
 
         @yield('head-imports')
-        @stack('scripts')
     </head>
     <body>
 

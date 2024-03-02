@@ -41,12 +41,12 @@
     
                 <div class="mb-3">
                     <label for="series" class="form-label">Serie<span class="text-danger"></span></label>
-                    <input type="text" class="form-control" id="series" name="series" placeholder="Inserisci la serie del fumetto..." maxlength="64" required>
+                    <input type="text" class="form-control" id="series" name="series" placeholder="Inserisci la serie del fumetto..." maxlength="64">
                 </div>
     
                 <div class="mb-3">
                     <label for="sale_date" class="form-label">Data di uscita<span class="text-danger"></span></label>
-                    <input type="date" class="form-control" id="sale_date" name="sale_date" placeholder="Inserisci la data di uscita del fumetto..." required>
+                    <input type="date" class="form-control" id="sale_date" name="sale_date" placeholder="Inserisci la data di uscita del fumetto...">
                 </div>
     
                 <div class="mb-3">
@@ -56,14 +56,12 @@
     
                 <div class="mb-3">
                     <label for="artists" class="form-label">Artisti<span class="text-danger"></span></label>
-                    <input type="text" class="form-control" id="artists" name="artists" placeholder="Inserisci l'artista'..." maxlength="1000" required>
-                    <button type="button" class="btn btn-secondary" onclick="duplicateInput('artists')">Aggiungi</button>
+                    <input type="text" class="form-control mb-2" id="artists" name="artists" placeholder="Inserisci l'artista'..." maxlength="1000" required>
                 </div>
     
                 <div class="mb-3">
                     <label for="writers" class="form-label">Scrittori<span class="text-danger"></span></label>
-                    <input type="text" class="form-control" id="writers" name="writers" placeholder="Inserisci gli scrittori..." maxlength="1000" required>
-                    <button type="button" class="btn btn-secondary" onclick="duplicateInput('writers')">Aggiungi</button>
+                    <input type="text" class="form-control mb-2" id="writers" name="writers" placeholder="Inserisci gli scrittori..." maxlength="1000" required>
                 </div>
     
                 <div>
@@ -77,19 +75,3 @@
     </div>
 </div>
 @endsection
-
-@push('scripts')
-    <script>
-        function duplicateInput(inputType) {
-            const originalInput = document.querySelector(`[name="${inputType}"]`);
-            
-            if (originalInput) {
-                const clone = originalInput.cloneNode(true);
-                clone.value = ''; 
-                originalInput.parentNode.appendChild(clone);
-            } else {
-                console.error(`Element with name "${inputType}" not found.`);
-            }
-        }
-    </script>
-@endpush
