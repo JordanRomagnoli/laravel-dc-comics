@@ -48,6 +48,21 @@ class ComicController extends Controller
         
         $explodedWriters = explode(',' , $comicData['writers']);  
         $comic->writers = json_encode($explodedWriters);
+
+        $validatedData = $request->validate([
+            'title'             => 'required|max:64',
+            'description'       => 'nullable',
+            'thumb'             => 'nullable|max:1024|url',
+            'price'             => 'nullable|numeric|min:1|max:1000',
+            'series'            => 'nullable|max:64',
+            'sale_date'         => 'nullable|date',
+            'type'              => 'required|max:64',
+            'artists'           => 'required|max:1000|json',
+            'writers'           => 'required|max:1000|json',
+        ], [
+            'title.required' => 'Titolo necessario',
+            'title.max' => 'Inserisci un titolo di massimo 64 caratteri'
+        ]);
         
         $comic->save();
         return redirect()->route('comics.show', ['comic' => $comic->id]);
@@ -81,6 +96,21 @@ class ComicController extends Controller
 
         $explodedWriters = explode(',' , $comicData['writers']);  
         $comicData['writers'] = json_encode($explodedWriters);
+
+        $validatedData = $request->validate([
+            'title'             => 'required|max:64',
+            'description'       => 'nullable',
+            'thumb'             => 'nullable|max:1024|url',
+            'price'             => 'nullable|numeric|min:1|max:1000',
+            'series'            => 'nullable|max:64',
+            'sale_date'         => 'nullable|date',
+            'type'              => 'required|max:64',
+            'artists'           => 'required|max:1000|json',
+            'writers'           => 'required|max:1000|json',
+        ], [
+            'title.required' => 'Titolo necessario',
+            'title.max' => 'Inserisci un titolo di massimo 64 caratteri'
+        ]);
 
         $comic->fill($comicData);
         $comic->save();
